@@ -48,6 +48,18 @@
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error != nil) {
             NSLog(@"%@", [error localizedDescription]);
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Offline"
+                                                                           message:@"The internet connection seems to be offline"
+                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Try again"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 // handle response here.
+                                                             }];
+            // add the OK action to the alert controller
+            [alert addAction:okAction];
+            [self presentViewController:alert animated:YES completion:^{}];
         }
         else {
             NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
