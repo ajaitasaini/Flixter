@@ -12,6 +12,7 @@ The following **required** functionality is complete:
 - [x] Poster images are loaded using the UIImageView category in the AFNetworking library.
 - [ ] User sees a loading state while waiting for the movies API.
 - [x] User can pull to refresh the movie list.
+- [x] User can see details regarding a specific movie on a different screen
 
 The following **optional** features are implemented:
 
