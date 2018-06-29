@@ -7,6 +7,7 @@ target 'Flixter' do
 
   # Pods for Flixter
   pod  'AFNetworking'
+  pod 'YouTube-Player-iOS-Helper'
 
 
   target 'FlixterTests' do
