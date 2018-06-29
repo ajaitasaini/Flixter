@@ -11,11 +11,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) NSArray *filteredData;
 
 @end
 
@@ -24,12 +27,10 @@
 - (void) viewDidLoad {
     
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
 
     [self.activityIndicator startAnimating];
     
@@ -37,8 +38,6 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-
-    
 }
 
 - (void) fetchMovies {
@@ -57,7 +56,6 @@
                                                              handler:^(UIAlertAction * _Nonnull action) {
                                                                  // handle response here.
                                                              }];
-            // add the OK action to the alert controller
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:^{}];
         }
@@ -67,15 +65,14 @@
             NSLog(@"%@", dataDictionary);
             
             self.movies  = dataDictionary[@"results"];
+            self.data = self.movies;
+            self.filteredData = self.data;
             
             for (NSDictionary *movie in self.movies){
                 NSLog(@"%@", movie[@"title"]);
             }
             
             [self.tableView reloadData];
-            // TODO: Get the array of movies
-            // TODO: Store the movies in a property to use elsewhere
-            // TODO: Reload your table view data
         }
         [self.refreshControl endRefreshing];
         [self.activityIndicator stopAnimating];
@@ -88,13 +85,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-//do parenthesis refer to return type?
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.movies.count;
+    return self.filteredData.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
      // a constructor
+    
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
     
     NSDictionary *movie = self.movies[indexPath.row];
@@ -102,16 +99,52 @@
     cell.titleLabel.text = movie[@"title"];
     cell.descriptionLabel.text = movie[@"overview"];
     
-    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
-    NSString *posterURLString = movie[@"poster_path"];
-    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+    NSString *urlString = [NSString stringWithFormat:@"https://image.tmdb.org/t/p/w500/%@", movie[@"poster_path"]];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-    
-    cell.posterView.image = nil;
-    [cell.posterView setImageWithURL:posterURL];
-    
+    [cell.posterView setImageWithURLRequest:request placeholderImage:nil
+                                    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+                                        
+                                        // imageResponse will be nil if the image is cached
+                                        if (imageResponse) {
+                                            NSLog(@"Image was NOT cached, fade in image");
+                                            cell.posterView.alpha = 0.0;
+                                            cell.posterView.image = image;
+                                            
+                                            //Animate UIImageView back to alpha 1 over 0.3sec
+                                            [UIView animateWithDuration:0.7 animations:^{
+                                                cell.posterView.alpha = 1.0;
+                                            }];
+                                        }
+                                        else {
+                                            NSLog(@"Image was cached so just update the image");
+                                            cell.posterView.image = image;
+                                        }
+                                    }
+                                    failure:^(NSURLRequest *request, NSHTTPURLResponse * response, NSError *error) {
+                                        // do something for the failure condition
+                                    }];
     return cell;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (searchText.length != 0) {
+        
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
+            return [evaluatedObject[@"title"] containsString:searchText];
+        }];
+        self.filteredData = [self.data filteredArrayUsingPredicate:predicate];
+        
+        NSLog(@"%@", self.filteredData);
+        
+    }
+    else {
+        self.filteredData = self.data;
+    }
+    
+    [self.tableView reloadData];
     
 }
 
