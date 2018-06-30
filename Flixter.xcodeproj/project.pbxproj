@@ -20,6 +20,8 @@
 		19AA6F4A20E5668E0066600D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AA6F4920E5668E0066600D /* DetailsViewController.m */; };
 		19AA6F4D20E5ACF80066600D /* MoviesGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AA6F4C20E5ACF80066600D /* MoviesGridViewController.m */; };
 		19AA6F5020E5B1310066600D /* MovieCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19AA6F4F20E5B1310066600D /* MovieCollectionCell.m */; };
+		19D8BC7420E6FDFF00EF5F8F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19D8BC7320E6FDFF00EF5F8F /* WebKit.framework */; };
+		19D8BC7720E6FE5B00EF5F8F /* TrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19D8BC7620E6FE5B00EF5F8F /* TrailerViewController.m */; };
 		7A67AD72D490612CAF4F2A11 /* libPods-FlixterTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC35C3CE5C8C2BD1D673E970 /* libPods-FlixterTests.a */; };
 		89126D810D93A794B53E7B0D /* libPods-Flixter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE625C29DBC6F88EF1855CC5 /* libPods-Flixter.a */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,9 @@
 		19AA6F4C20E5ACF80066600D /* MoviesGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesGridViewController.m; sourceTree = "<group>"; };
 		19AA6F4E20E5B1310066600D /* MovieCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieCollectionCell.h; sourceTree = "<group>"; };
 		19AA6F4F20E5B1310066600D /* MovieCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionCell.m; sourceTree = "<group>"; };
+		19D8BC7320E6FDFF00EF5F8F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		19D8BC7520E6FE5B00EF5F8F /* TrailerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrailerViewController.h; sourceTree = "<group>"; };
+		19D8BC7620E6FE5B00EF5F8F /* TrailerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrailerViewController.m; sourceTree = "<group>"; };
 		39FC56C11CDBCA78D7A8BF00 /* Pods-Flixter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flixter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flixter/Pods-Flixter.debug.xcconfig"; sourceTree = "<group>"; };
 		9B019F630A84979CC3245E91 /* Pods-FlixterUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlixterUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlixterUITests/Pods-FlixterUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A2A57B4116078F22C6A26A13 /* Pods-FlixterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlixterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FlixterTests/Pods-FlixterTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19D8BC7420E6FDFF00EF5F8F /* WebKit.framework in Frameworks */,
 				89126D810D93A794B53E7B0D /* libPods-Flixter.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +140,8 @@
 				193BFD7F20E409C800296F34 /* AppDelegate.h */,
 				193BFD8020E409C800296F34 /* AppDelegate.m */,
 				193BFD8520E409C800296F34 /* Main.storyboard */,
+				19D8BC7520E6FE5B00EF5F8F /* TrailerViewController.h */,
+				19D8BC7620E6FE5B00EF5F8F /* TrailerViewController.m */,
 				193BFD8820E409C800296F34 /* Assets.xcassets */,
 				193BFD8A20E409C800296F34 /* LaunchScreen.storyboard */,
 				193BFD8D20E409C800296F34 /* Info.plist */,
@@ -180,6 +188,7 @@
 		8890444D4DE4CE14DDACC015 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19D8BC7320E6FDFF00EF5F8F /* WebKit.framework */,
 				CE625C29DBC6F88EF1855CC5 /* libPods-Flixter.a */,
 				CC35C3CE5C8C2BD1D673E970 /* libPods-FlixterTests.a */,
 				C65283BADD961E7BB673401D /* libPods-FlixterUITests.a */,
@@ -394,6 +403,7 @@
 				19AA6F4A20E5668E0066600D /* DetailsViewController.m in Sources */,
 				193BFD8120E409C800296F34 /* AppDelegate.m in Sources */,
 				19AA6F5020E5B1310066600D /* MovieCollectionCell.m in Sources */,
+				19D8BC7720E6FE5B00EF5F8F /* TrailerViewController.m in Sources */,
 				1981756B20E5562100C54EFD /* MovieCell.m in Sources */,
 				1981756720E45E2F00C54EFD /* MoviesViewController.m in Sources */,
 				19AA6F4D20E5ACF80066600D /* MoviesGridViewController.m in Sources */,

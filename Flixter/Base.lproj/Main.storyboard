@@ -115,6 +115,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="kN9-u3-QX6">
+                                        <rect key="frame" x="0.0" y="-64" width="375" height="295"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="PSn-cf-rGc">
+                                        <rect key="frame" x="0.0" y="-64" width="375" height="295"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="EM4-8C-QXE" appends="YES" id="yOW-0Q-IkL"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </scrollView>
@@ -129,6 +141,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZy-am-r60" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EM4-8C-QXE">
+                    <connections>
+                        <segue destination="WxK-ut-sF2" kind="push" id="N7l-2O-qtM"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1005.5" y="-737.5"/>
         </scene>
@@ -236,6 +253,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJH-MM-kXr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="565.5" y="118.5"/>
+        </scene>
+        <!--Trailer View Controller-->
+        <scene sceneID="IuF-fG-9Ty">
+            <objects>
+                <viewController id="WxK-ut-sF2" customClass="TrailerViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ne4-wd-tHg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" misplaced="YES" id="U2n-iu-Y0g">
+                                <rect key="frame" x="39" y="235" width="297" height="196"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8G1-TD-UPy"/>
+                    <connections>
+                        <outlet property="webView" destination="U2n-iu-Y0g" id="ek6-ed-7dz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pN9-zO-aVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1249.5" y="66.5"/>
         </scene>
     </scenes>
     <resources>
